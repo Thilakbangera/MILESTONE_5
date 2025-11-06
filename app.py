@@ -283,7 +283,7 @@ if page == "1️⃣ Overview":
 
                     # Build model and load weights
                     model = build_bilstm_model(SEQ_LENGTH, len(features))
-                    model.load_weights(r"C:\MILESTONE_5\final_rul_bilstm.weights.h5")
+                    model.load_weights("final_rul_bilstm.weights.h5")
 
                     # Predict
                     y_pred = model.predict(X_input)
@@ -660,3 +660,4 @@ elif page == "4️⃣ Chatbot":
                     st.markdown(fallback_msg)
                     st.session_state.messages.append({"role": "assistant", "content": fallback_msg})
                     st.warning("Using fallback mode (Tavily error)")
+
