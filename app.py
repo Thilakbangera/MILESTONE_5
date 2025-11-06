@@ -10,6 +10,7 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM, Bidirectional
 from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.metrics import MeanSquaredError
 
 st.set_page_config(
     page_title="AI Predictive Maintenance",
@@ -283,8 +284,7 @@ if page == "1️⃣ Overview":
 
                     # Build model and load weights
                     model = build_bilstm_model(SEQ_LENGTH, len(features))
-                    model = load_model("final_rul_bilstm.weights.h5")
-
+                    model = load_model("final_rul_bilstm.h5",custom_objects={"mse": MeanSquaredError()})
                     # Predict
                     y_pred = model.predict(X_input)
                     predicted_rul = float(y_pred[0][0])
@@ -660,6 +660,7 @@ elif page == "4️⃣ Chatbot":
                     st.markdown(fallback_msg)
                     st.session_state.messages.append({"role": "assistant", "content": fallback_msg})
                     st.warning("Using fallback mode (Tavily error)")
+
 
 
 
